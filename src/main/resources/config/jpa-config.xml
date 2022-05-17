@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+   	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                       	http://www.springframework.org/schema/beans/spring-beans.xsd
+                       	http://www.springframework.org/schema/data/jpa
+                       	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+	<!--Indica donde están los DAO, que se traduce en el properties -->
+<jpa:repositories base-package="${Repositorios}" />
+
+	<bean id="entityManagerFactory"
+      	class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    	<property name="dataSource" ref="dataSource" />
+    	<!-- Decimos donde buscar entidades, se descibra en el properties -->
+    	<property name="packagesToScan" value="${Entidades}" />
+    	<!-- Decimos como se mapean de Java a BD y viceversa -->
+    	<property name="mappingResources">
+        	<list>
+            	<value>jpa/Servicio.orm.xml</value>
+            	<value>jpa/Empleado.orm.xml</value>
+        	
+            </list>
+    	</property>
+    	<property name="jpaVendorAdapter">
+        	<!-- Implementacion de JPA que vamos a usar -->
+        	<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+    	</property>
+    	<property name="jpaProperties">
+        	<props>
+        	
+        		<!-- Se cambia si cambiamos de base de datos -->
+            	<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+            	<!-- <prop key="hibernate.show_sql">true</prop> -->
+            	<!-- Create lo meto para crear -->
+            	<prop key="hibernate.hbm2ddl.auto">create</prop>
+            	<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+        	</props>
+    	</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    	<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<bean id="persistenceExceptionTranslationPostProcessor"
+      	class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+</beans>
