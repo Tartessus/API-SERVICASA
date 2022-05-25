@@ -19,7 +19,7 @@ public class EmpleadoConId extends Empleado {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true)
 	private Long id;
-	@OneToMany(targetEntity = ServicioConId.class, mappedBy = "empleado")
+	@OneToMany(targetEntity = ServicioConId.class)
 	private Collection<ServicioConId> servicios;
 
 	public Long getId() {
@@ -38,17 +38,19 @@ public class EmpleadoConId extends Empleado {
 		this.servicios = serviciosEmpleado;
 	}
 
-	public void addServicioConId(ServicioConId servicio) {
-		getServicios().add(servicio);
-		servicio.setEmpleado(this);
-	}
+	
 
 	public EmpleadoConId() {
 	};
 
-	public EmpleadoConId(Collection<ServicioConId> servicio) {
+	public EmpleadoConId(Collection<ServicioConId> servicios) {
 		super();
-		this.servicios = servicio;
+		this.servicios = servicios;
+	}
+	
+	public void addServicioConId(ServicioConId servicio) {
+		getServicios().add(servicio);
+		servicio.setEmpleado(this);
 	}
 
 }

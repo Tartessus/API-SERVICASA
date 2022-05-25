@@ -8,6 +8,10 @@
 	<!--Entity es para indicar las entidades -->
 	<mapped-superclass class="SERVICASA.Servicio" access="FIELD">
 		<attributes>
+		<id name="id">
+				<generated-value strategy="IDENTITY" />
+			</id>
+		
 			<basic name="nombre" optional="false">
 				<column name="NOMBRE" />
 			</basic>	

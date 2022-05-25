@@ -8,6 +8,10 @@
 	<!--Entity es para indicar las entidades -->
 	<mapped-superclass class="SERVICASA.Empleado" access="FIELD">
 		<attributes>
+		<basic name="dni">
+				<column name="DNI" />
+			</basic>
+		
 			<basic name="nombre" optional="false">
 				<column name="NOMBRE" />
 			</basic>

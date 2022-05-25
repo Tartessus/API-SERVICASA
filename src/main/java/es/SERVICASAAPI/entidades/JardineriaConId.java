@@ -29,5 +29,8 @@ public class JardineriaConId extends ServicioConId implements Jardineria {
 
 	};
 
-	
+	public JardineriaConId(String nombre, float precioBase) {
+		super(nombre, precioBase);
+	};
+
 }

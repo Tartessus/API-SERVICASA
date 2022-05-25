@@ -19,7 +19,7 @@ import SERVICASA.*;
 @Entity
 @Table(name = "SERVICIOS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "TIPO_SERVICIO", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn( name = "TIPO_SERVICIO", discriminatorType = DiscriminatorType.STRING)
 public class ServicioConId extends Servicio {
 
 	@Id
@@ -50,7 +50,7 @@ public class ServicioConId extends Servicio {
 	public ServicioConId() {
 	};
 
-	public ServicioConId(String nombre, Float precioBase) {
+	public ServicioConId(String nombre, float precioBase) {
 		super(nombre, precioBase);
 	}
 
